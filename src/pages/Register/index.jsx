@@ -25,7 +25,6 @@ const Register = () => {
     })
     
     const toSubmit = (user) => {
-        console.log(user)
         api.post('/users', user).then((_) => {
             toast.success("Sucesso ao criar a conta")
             return history.push("/login")

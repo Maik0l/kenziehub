@@ -7,7 +7,7 @@ import * as yup from 'yup'
 import { toast } from 'react-toastify'
 import api from '../../services/api'
 
-const Login = () => {
+const Login = ( {authentic, setAuthentic} ) => {
     
     const history = useHistory()
     
@@ -20,16 +20,24 @@ const Login = () => {
         resolver: yupResolver(schema)
     })
     
-    const toSubmit = ( {email, password} ) => {
+    const toSubmit = ( {email, password } ) => {
         const user = {email, password}
-        console.log(user)
-        api.post('/sessions', user).then((response) => {
-            const { token } = response.data
 
-            localStorage.setItem("@Kenziehub", JSON.stringify(token))
+        api.post('/sessions', user).then((response) => {
+            const { token } = response.data;
+            const { id } = response.data.user;
+
+            localStorage.setItem("@Kenziehub:token", JSON.stringify(token))
+            localStorage.setItem("@Kenziehub:id", JSON.stringify(id))
+
+            setAuthentic(true)
 
             return history.push("/dashboard")
         }).catch((err) => toast.error("Email ou senha inválidos"))
+    }
+
+    if (authentic) {
+        return <Redirect to="/dashboard"/>
     }
 
 
@@ -39,19 +47,19 @@ const Login = () => {
                 <h1>Faça seu login</h1>
                 <TextField 
                 label="Email" 
-                variant="outlined"
+                variant="filled"
                 {...register("email")}
                 error={!!errors.email}
                 helperText={errors.email?.message}/>
                 <TextField 
                 label="Senha" 
-                variant="outlined"
+                variant="filled"
                 {...register("password")}
                 type="password"
                 error={!!errors.password}
                 helperText={errors.password?.message}/>
-                <NewButton type="submit">Registrar</NewButton>
-                <p>Ainda não possui conta? <Link to='/register'>Registrar</Link></p>
+                <NewButton type="submit">Login</NewButton>
+                <p>Ainda não possui conta? <Link to='/register'>Entrar</Link></p>
             </form>
         </Content>
         <Background/>

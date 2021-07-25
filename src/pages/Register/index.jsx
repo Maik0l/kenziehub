@@ -7,7 +7,7 @@ import * as yup from 'yup'
 import api from '../../services/api'
 import { toast } from 'react-toastify'
 
-const Register = () => {
+const Register = ( {authentic} ) => {
 
     const history = useHistory()
     
@@ -31,6 +31,9 @@ const Register = () => {
         }).catch((err) => toast.error("Erro ao criar a conta"))
     }
 
+    if (authentic) {
+        return <Redirect to="/dashboard"/>
+    }
 
     return <Container>
         <Background/>
@@ -39,42 +42,42 @@ const Register = () => {
                 <h1>Faça seu registro</h1>
                 <TextField 
                 label="Nome" 
-                variant="outlined"
+                variant="filled"
                 {...register("name")}
                 error={!!errors.name}
                 helperText={errors.name?.message}/>
                 <TextField 
                 label="Email" 
-                variant="outlined"
+                variant="filled"
                 {...register("email")}
                 error={!!errors.email}
                 helperText={errors.email?.message}/>
                 <TextField 
                 label="Senha" 
-                variant="outlined"
+                variant="filled"
                 {...register("password")}
                 type="password"
                 error={!!errors.password}
                 helperText={errors.password?.message}/>
                 <TextField 
                 label="Bio" 
-                variant="outlined"
+                variant="filled"
                 {...register("bio")}
                 error={!!errors.bio}
                 helperText={errors.bio?.message}/>
                 <TextField 
                 label="Contato" 
-                variant="outlined"
+                variant="filled"
                 {...register("contact")}
                 error={!!errors.contact}
                 helperText={errors.contact?.message}/>
                 <TextField 
                 label="Módulo" 
-                variant="outlined"
+                variant="filled"
                 {...register("course_module")}
                 error={!!errors.module}
                 helperText={errors.course_module?.message}/>
-                <NewButton type="submit">Registrar</NewButton>
+                <NewButton type="submit">Entrar</NewButton>
                 <p>Já possui conta? <Link to='/login'>Entrar</Link></p>
             </form>
         </Content>

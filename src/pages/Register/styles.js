@@ -34,7 +34,7 @@ export const Content = styled.div`
         }
 
         div {
-            margin-bottom: 0.40rem;
+            margin-bottom: 0.17rem;
         }
 
         p {

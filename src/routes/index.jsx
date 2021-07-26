@@ -11,7 +11,7 @@ const Routes = () => {
     const [authentic, setAuthentic] = useState(false);
 
     useEffect(() => {
-        const token = JSON.parse(localStorage.getItem("@Kenziehub"))
+        const token = JSON.parse(localStorage.getItem("@Kenziehub:token"))
 
         if (token) {
             return setAuthentic(true)
@@ -31,7 +31,8 @@ const Routes = () => {
                 <Register authentic={authentic}/>
             </Route>
             <Route path="/dashboard">
-                <Dashboard authentic={authentic}/>
+                <Dashboard authentic={authentic}
+                setAuthentic={setAuthentic}/>
             </Route>
         </Switch>
     )

@@ -39,3 +39,18 @@ export const TechsContainer = styled.div`
     flex-direction: row-reverse;
     max-width: 50rem;
 `
+
+export const LogoutButton = styled(Button)`
+    && {
+        background-color: var(--blue);
+        border: 1px solid var(--white);
+        margin: 1rem 0rem 0rem 1rem;
+        position: absolute;
+        right: 5px;
+    }
+
+        &&:hover {
+            background-color: white;
+            border: 1px solid var(--blue)
+        }
+`

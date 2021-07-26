@@ -1,5 +1,5 @@
 import { Redirect } from 'react-router-dom'
-import { Container, Content, NewButton, TechsContainer, InputContent } from './styles'
+import { Container, Content, NewButton, LogoutButton , TechsContainer, InputContent } from './styles'
 import { TextField } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from 'react'
@@ -7,8 +7,8 @@ import api from '../../services/api'
 import { toast } from 'react-toastify'
 import Card from '../../components/Card'
 
-const Dashboard = ( {authentic} ) => {
-    
+const Dashboard = ( {authentic, setAuthentic} ) => {
+
     const { register, handleSubmit} = useForm();
     const [token] = useState(JSON.parse(localStorage.getItem("@Kenziehub:token")) || "")
     const [userId] = useState(JSON.parse(localStorage.getItem('@Kenziehub:id')) || "")
@@ -24,7 +24,7 @@ const Dashboard = ( {authentic} ) => {
         })
     }
 
-    const toSubmitTech = ( {title, status, id} ) => {
+    const toSubmitTech = ( {title, status} ) => {
         api.post("/users/techs/", 
         {
             title: title,
@@ -50,9 +50,17 @@ const Dashboard = ( {authentic} ) => {
         ).catch((err) => console.log(err))
     }
 
-    useEffect(() => {
-        loadTechs()
-    })
+    const handleLogout = () => {
+        localStorage.clear()
+        setAuthentic(false)
+    }
+
+    // useEffect(() => {
+    //     loadTechs()
+    // }, [loadTechs])
+
+
+    console.log(userTechs)
 
     if (!authentic) {
         return <Redirect to="/login"/>
@@ -61,6 +69,7 @@ const Dashboard = ( {authentic} ) => {
 
     return <Container>
         <h1><span>KenzieHub</span> | Dashboard</h1>
+        <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
         <p>Adicione ou exclua tecnologias que você já conhece!</p>
         <Content>
             <InputContent>
@@ -82,7 +91,6 @@ const Dashboard = ( {authentic} ) => {
             id={item.id}
             handleRemove={handleRemove}
             />)}
-            {userTechs.map((item) => console.log(item.id))}
         </TechsContainer>
     </Container>
 }

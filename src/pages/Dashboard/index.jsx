@@ -1,5 +1,5 @@
 import { Redirect } from 'react-router-dom'
-import { Container, Content, NewButton, TechsContainer } from './styles'
+import { Container, Content, NewButton, TechsContainer, InputContent } from './styles'
 import { TextField } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from 'react'
@@ -47,7 +47,7 @@ const Dashboard = ( {authentic} ) => {
                 Authorization: `Bearer ${token}`
             }
         },
-        ).catch((err) => toast.error("aAAAAAAAAAAA"))
+        ).catch((err) => console.log(err))
     }
 
     useEffect(() => {
@@ -63,13 +63,17 @@ const Dashboard = ( {authentic} ) => {
         <h1><span>KenzieHub</span> | Dashboard</h1>
         <p>Adicione ou exclua tecnologias que você já conhece!</p>
         <Content>
-            <form onSubmit={handleSubmit(toSubmitTech)}>
-                <TextField label="Nome da tecnologia"
-                {...register("title")}/>
-                <TextField label="Nível"
-                {...register("status")}/>
-                <NewButton type="submit">Adicionar</NewButton>
-            </form>
+            <InputContent>
+                <form onSubmit={handleSubmit(toSubmitTech)}>
+                    <TextField label="Nome da tecnologia"
+                    {...register("title")}/>
+                    <TextField label="Nível"
+                    {...register("status")}/>
+                    <div>
+                    <NewButton type="submit">Adicionar</NewButton>
+                    </div>
+                </form>
+            </InputContent>
         </Content>
         <TechsContainer>
             {userTechs.map((item) => <Card

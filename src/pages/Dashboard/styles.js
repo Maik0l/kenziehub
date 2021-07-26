@@ -8,8 +8,9 @@ export const Container = styled.div`
     align-items: center;
 
     span {
-        color: var(--darkblue)
+        color: var(--darkblue);
     }
+
 `
 
 export const Content = styled.div`
@@ -20,13 +21,21 @@ export const Content = styled.div`
 export const NewButton = styled(Button)`
     && {
         border: 1px solid var(--blue);
-        margin-left: 1rem;
+        margin: 1rem 0rem 0rem 1rem;
+    }
+`
+
+export const InputContent = styled.div`
+    @media (max-width: 425px) {
+        display: flex;
+        flex-direction: column;
     }
 `
 
 export const TechsContainer = styled.div`
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     flex-direction: row-reverse;
-    max-width: 30rem;
+    max-width: 50rem;
 `

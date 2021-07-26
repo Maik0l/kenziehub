@@ -59,7 +59,7 @@ const Login = ( {authentic, setAuthentic} ) => {
                 error={!!errors.password}
                 helperText={errors.password?.message}/>
                 <NewButton type="submit">Login</NewButton>
-                <p>Ainda não possui conta? <Link to='/register'>Entrar</Link></p>
+                <p>Ainda não possui conta? <Link to='/register'>Registrar</Link></p>
             </form>
         </Content>
         <Background/>

@@ -24,7 +24,7 @@ const Dashboard = ( {authentic} ) => {
         })
     }
 
-    const toSubmitTech = ( {title, status} ) => {
+    const toSubmitTech = ( {title, status, id} ) => {
         api.post("/users/techs/", 
         {
             title: title,
@@ -41,15 +41,24 @@ const Dashboard = ( {authentic} ) => {
         }).catch((err) => toast.error("Erro ao cadastrar"))
     }
 
-    // useEffect(() => {
-        
-    //     api.get(`/users/${userId}`).then((_) => {}) 
-    // }, [])
-    
+    const handleRemove = (idTech) => {
+        api.delete(`users/techs/${idTech}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        },
+        ).catch((err) => toast.error("aAAAAAAAAAAA"))
+    }
+
+    useEffect(() => {
+        loadTechs()
+    })
+
     if (!authentic) {
         return <Redirect to="/login"/>
     }
     
+
     return <Container>
         <h1><span>KenzieHub</span> | Dashboard</h1>
         <p>Adicione ou exclua tecnologias que você já conhece!</p>
@@ -66,7 +75,10 @@ const Dashboard = ( {authentic} ) => {
             {userTechs.map((item) => <Card
             title={item.title}
             status={item.status}
+            id={item.id}
+            handleRemove={handleRemove}
             />)}
+            {userTechs.map((item) => console.log(item.id))}
         </TechsContainer>
     </Container>
 }

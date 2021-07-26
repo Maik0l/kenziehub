@@ -77,7 +77,7 @@ const Register = ( {authentic} ) => {
                 {...register("course_module")}
                 error={!!errors.module}
                 helperText={errors.course_module?.message}/>
-                <NewButton type="submit">Entrar</NewButton>
+                <NewButton type="submit">Registrar</NewButton>
                 <p>Já possui conta? <Link to='/login'>Entrar</Link></p>
             </form>
         </Content>

@@ -27,5 +27,6 @@ export const NewButton = styled(Button)`
 export const TechsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row-reverse;
     max-width: 30rem;
 `
